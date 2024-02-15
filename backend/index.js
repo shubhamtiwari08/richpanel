@@ -11,8 +11,9 @@ initializeDatabase();
 
 
 app.use(express.json());
+app.use(cors())
 
-app.use('/', userRoutes)
+app.use('/auth', userRoutes)
 
 app.get('/test', (req, res) => {
    res.json({name:"yeloow"})

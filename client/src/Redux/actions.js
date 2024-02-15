@@ -1,7 +1,7 @@
 
 export const signUp=async(dispatch,data)=>{
     try {
-        const res = await fetch('https://localhost:3001/auth/signup',{
+        const res = await fetch('http://localhost:3001/auth/signup',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
