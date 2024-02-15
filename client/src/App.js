@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import ConnectFacebook from './Pages/ConnectFacebook';
 import ConnectedFacebook from './Pages/ConnectedFacebook';
 import Conversation from './Pages/Conversation';
+import Landing from './Pages/Landing';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
  
       <Routes>
+         <Route path='/' element={<Landing/>}/>
          <Route path='/signup' element={<Signup/>}/>
          <Route path='/login' element={<Login/>}/>
          <Route path='/connect-facebook' element={<ConnectFacebook/>}/>
