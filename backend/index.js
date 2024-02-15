@@ -1,4 +1,4 @@
-
+const passport = require('passport')
 const express = require("express")
 const cors = require('cors')
 const app = express()
@@ -9,7 +9,8 @@ const { initializeDatabase } = require("./db/db.connection");
 
 initializeDatabase();
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.json());
 app.use(cors())
 
