@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { signUp } from "../Redux/actions";
@@ -14,6 +14,8 @@ function SingupForm() {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state)
+
+  console.log(isLoggedIn.signedUp)
   
 
     const Navigate = useNavigate();
@@ -32,10 +34,14 @@ function SingupForm() {
     e.preventDefault();
     signUp(dispatch, userData);
     setUserData(initialState);
+    
+  };
+
+  useEffect(()=>{
     if(isLoggedIn.signedUp){
         Navigate('/login')
     }
-  };
+  },[isLoggedIn.signedUp])
 
   return (
     <form className="w-80 h-max py-7 bg-white flex flex-col items-center justify-center rounded-md">

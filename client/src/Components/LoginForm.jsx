@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../Redux/actions";
+import { useNavigate } from "react-router";
 
 function LoginForm() {
 
@@ -12,6 +13,8 @@ function LoginForm() {
     const [userData,setUserData] = useState(initialState)
 
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector(state => state)
+    const navigate = useNavigate()
 
     const handleInput = (e) => {
         const name = e.target.name;
@@ -23,7 +26,14 @@ function LoginForm() {
         e.preventDefault();
         logIn(dispatch, userData);
         setUserData(initialState);
+       
       };
+
+      useEffect(()=>{
+        if(isLoggedIn.loggedIn){
+            navigate('/connect-facebook')
+        }
+      },[isLoggedIn.loggedIn])
 
   return (
     <form className="w-80 h-max py-7 bg-white flex flex-col items-center justify-center rounded-md">

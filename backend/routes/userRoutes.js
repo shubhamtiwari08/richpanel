@@ -36,4 +36,20 @@ router.post("/login", async (req, res) => {
 });
 
 
+router.get(
+    "/facebook",
+    passport.authenticate("facebook", { scope:[ 'public_profile','email'] })
+    //'user_posts','email','user_photos','user_location','user_videos','user_link','user_gender',
+  );
+  
+  router.get(
+    "/facebook/callback",
+    passport.authenticate("facebook", {
+      failureRedirect: "https://richpanel-ruby.vercel.app/connect-facebook",
+      successRedirect: "https://richpanel-ruby.vercel.app/connect-facebook/connected",
+    })
+  );
+  
+
+
 module.exports = router;
