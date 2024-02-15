@@ -10,8 +10,12 @@ function SingupForm() {
     password: "",
   };
 
+
   const dispatch = useDispatch();
+
   const isLoggedIn = useSelector((state) => state)
+  
+
     const Navigate = useNavigate();
 
   
@@ -28,6 +32,9 @@ function SingupForm() {
     e.preventDefault();
     signUp(dispatch, userData);
     setUserData(initialState);
+    if(isLoggedIn.signedUp){
+        Navigate('/login')
+    }
   };
 
   return (

@@ -1,7 +1,7 @@
 
 export const signUp=async(dispatch,data)=>{
     try {
-        const res = await fetch('http://localhost:3001/auth/signup',{
+        const res = await fetch('https://richpanel-dxy6.onrender.com/auth/signup',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export const signUp=async(dispatch,data)=>{
 
 export const logIn=async(dispatch,data)=>{
     try {
-        const res = await fetch('http://localhost:3001/auth/login',{
+        const res = await fetch('https://richpanel-dxy6.onrender.com/auth/login',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',

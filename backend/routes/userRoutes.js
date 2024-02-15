@@ -13,7 +13,7 @@ router.post("/signup", async (req, res) => {
   const signUpData = req.body;
   console.log(signUpData);
   try {
-    console.log("wor");
+    
     const savedData = await signup(signUpData);
     res
       .status(201)
