@@ -44,9 +44,20 @@ app.post('/webhook', (req, res) => {
         let webhook_event = entry.messaging[0];
         console.log(webhook_event,"check");
 
-        const message = Message({webhook_event})
-
-        const saved_message = await message.save()
+        const newMessage = new Message({
+            senderId: webhook_event.sender.id,
+            messages: [
+              {
+                mid: webhook_event.message.mid,
+                text: webhook_event.message.text,
+              },
+            ],
+          });
+  
+          // Save the message to MongoDB
+          const savedMessage = await newMessage.save();
+          console.log('Saved message:', savedMessage);
+        
 
 
 
