@@ -44,19 +44,23 @@ app.post('/webhook', (req, res) => {
         let webhook_event = entry.messaging[0];
         console.log(webhook_event,"check");
 
-        const newMessage = new Message({
-            senderId: webhook_event.sender.id,
-            messages: [
-              {
-                mid: webhook_event.message.mid,
-                text: webhook_event.message.text,
+        const updatedMessage = await Message.findOneAndUpdate(
+            { 'senderId': webhook_event.sender.id },
+            {
+              $set: {
+                'senderId': webhook_event.sender.id,
               },
-            ],
-          });
+              $push: {
+                'messages': {
+                  'mid': webhook_event.message.mid,
+                  'text': webhook_event.message.text,
+                },
+              },
+            },
+            { upsert: true, new: true }
+          );
   
-          // Save the message to MongoDB
-          const savedMessage = await newMessage.save();
-          console.log('Saved message:', savedMessage);
+          console.log('Updated message:', updatedMessage);
         
 
 
