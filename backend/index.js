@@ -7,6 +7,7 @@ require("dotenv").config()
 
 const userRoutes = require("./routes/userRoutes")
 const { initializeDatabase } = require("./db/db.connection");
+const { User } = require('./models/User.model')
 
 initializeDatabase();
 
@@ -79,7 +80,15 @@ app.get('/webhook', (req, res) => {
   });
 
 
+passport.serializeUser(function(user,done){
+    done(null,user.id);
+})
 
+passport.deserializeUser(function(id,done){
+    // User.findById(id,function(err,user){
+    //     done(err,user);
+   return done(null,id);
+})
 
 
 
