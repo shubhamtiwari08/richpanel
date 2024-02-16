@@ -1,5 +1,6 @@
 const passport           = require('passport');
 const FacebookStrategy   = require('passport-facebook').Strategy;
+const {User} = require("./models/User.model")
 require('dotenv').config();
 
 
@@ -25,6 +26,8 @@ passport.use(new FacebookStrategy({
           return cb(null, user);
         }
   
+        //  console.log(User,profile)
+        //  return cb(null, profile)
         
       } catch (err) {
         return cb(err, null);

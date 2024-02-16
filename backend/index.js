@@ -3,17 +3,20 @@ const session = require('express-session')
 const express = require("express")
 const cors = require('cors')
 const app = express()
+require('./passport'); 
 require("dotenv").config()
 
-const userRoutes = require("./routes/userRoutes")
+ 
+const userRoutes = require("./routes/userRoutes")(passport);
 const { initializeDatabase } = require("./db/db.connection");
 const { User } = require('./models/User.model')
 
 initializeDatabase();
 
+app.use(session({ secret: "thisisecretekey" }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({secret:"thisisecretekey"}));
+
 
 app.use(express.json());
 app.use(cors())
@@ -84,12 +87,11 @@ passport.serializeUser(function(user,done){
     done(null,user.id);
 })
 
-passport.deserializeUser(function(id,done){
-    // User.findById(id,function(err,user){
-    //     done(err,user);
-   return done(null,id);
-})
-
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
 
 
 app.listen(3001, () => {

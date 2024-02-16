@@ -3,7 +3,7 @@ import React from 'react'
 function ConnectFbModal() {
 
     const handleFacebookAuth = () => {
-        window.location.href = "https://richpanel-ruby.vercel.app/auth/facebook";
+        window.location.href = "http://localhost:3001/auth/facebook";
       };
 
   return (

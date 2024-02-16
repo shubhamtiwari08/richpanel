@@ -4,10 +4,14 @@ const app = express();
 const router = express.Router();
 const passport = require("passport");
 
+ 
+
 const {
   signup,
   login,
 } = require("../controllers/userController");
+
+ 
 
 router.post("/signup", async (req, res) => {
   console.log("signup");
@@ -37,20 +41,28 @@ router.post("/login", async (req, res) => {
 });
 
 
-router.get(
-    "/facebook",
-    passport.authenticate("facebook", { scope:[ 'public_profile','email'] })
-    //'user_posts','email','user_photos','user_location','user_videos','user_link','user_gender',
-  );
-  
-  router.get(
-    "/facebook/callback",
-    passport.authenticate("facebook", {
-      failureRedirect: "https://richpanel-ruby.vercel.app/connect-facebook",
-      successRedirect: "https://richpanel-ruby.vercel.app/connect-facebook/connected",
-    })
-  );
+
+
   
 
 
-module.exports = router;
+  module.exports = function(passport) {
+    // Initialize and use Passport in your routes
+
+    router.get(
+        "/facebook",
+        passport.authenticate("facebook", { scope:[ 'public_profile','email','pages_read_user_content','pages_show_list','pages_manage_metadata','pages_manage_metadata',' pages_read_engagement', 'pages_messaging'] })
+        //'user_posts','email','user_photos','user_location','user_videos','user_link','user_gender',
+      );
+      
+    
+      router.get(
+        "/facebook/callback",
+        passport.authenticate("facebook", {
+          failureRedirect: "https://richpanel-ruby.vercel.app/connect-facebook",
+          successRedirect: "https://richpanel-ruby.vercel.app/connect-facebook/connected",
+        })
+      );
+    
+    return router;
+  };
