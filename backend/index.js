@@ -1,4 +1,5 @@
 const passport = require('passport')
+const session = require('express-session')
 const express = require("express")
 const cors = require('cors')
 const app = express()
@@ -11,6 +12,8 @@ initializeDatabase();
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(session({secret:"thisisecretekey"}));
+
 app.use(express.json());
 app.use(cors())
 
