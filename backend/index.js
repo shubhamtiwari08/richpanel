@@ -10,6 +10,7 @@ require("dotenv").config()
 const userRoutes = require("./routes/userRoutes")(passport);
 const { initializeDatabase } = require("./db/db.connection");
 const { User } = require('./models/User.model')
+const Message = require('./models/Messages.model')
 
 initializeDatabase();
 
@@ -41,7 +42,9 @@ app.post('/webhook', (req, res) => {
         // Gets the message. entry.messaging is an array, but 
         // will only ever contain one message, so we get index 0
         let webhook_event = entry.messaging[0];
-        console.log(webhook_event);
+        console.log(webhook_event,"check");
+
+
       });
   
       // Returns a '200 OK' response to all requests
